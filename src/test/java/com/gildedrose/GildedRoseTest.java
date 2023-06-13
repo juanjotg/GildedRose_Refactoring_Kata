@@ -111,6 +111,21 @@ class GildedRoseTest {
 		assertEquals(1, app.items[0].sellIn);
 		assertEquals(5, app.items[0].quality);
 	}
+	
+	/**
+	 * La calidad de un artículo nunca es mayor a 50 excepto (Sulfuras) posee una calidad inmutable de 80
+	 */
+	@Test
+	void sulfurasImmutableQualityEighty() {
+
+		Item[] items = new Item[] { new Item("Sulfuras, Hand of Ragnaros", 1, 80) };
+
+		GildedRose app = new GildedRose(items);
+
+		app.updateQuality();
+
+		assertEquals(80, app.items[0].quality);
+	}
 
 	/**
 	 * (Backstage passes to a TAFKAL80ETC concert) si faltan 10 días o menos la

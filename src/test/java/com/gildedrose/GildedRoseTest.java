@@ -44,13 +44,28 @@ class GildedRoseTest {
 	 */
 	@Test
 	void qualityNeverNegative() {
-
-		Item[] items = new Item[] { new Item("commonProduct", 1, 0) };
+				
+		Item[] items = new Item[] {
+                new Item("commonProduct", 2, 0), //                                                                                           
+                new Item("Conjured product", 2, 0) };
+		
 		GildedRose app = new GildedRose(items);
 
 		app.updateQuality();
 
 		assertEquals(0, app.items[0].quality);
+		assertEquals(0, app.items[1].quality);
+				
+		items = new Item[] {
+                new Item("commonProduct", 0, 0), //                                                                                       
+                new Item("Conjured product", 0, 0) };
+		
+		app = new GildedRose(items);
+
+		app.updateQuality();
+
+		assertEquals(0, app.items[0].quality);
+		assertEquals(0, app.items[1].quality);				
 	}
 
 	/**
@@ -111,9 +126,10 @@ class GildedRoseTest {
 		assertEquals(1, app.items[0].sellIn);
 		assertEquals(5, app.items[0].quality);
 	}
-	
+
 	/**
-	 * La calidad de un artículo nunca es mayor a 50 excepto (Sulfuras) posee una calidad inmutable de 80
+	 * La calidad de un artículo nunca es mayor a 50 excepto (Sulfuras) posee una
+	 * calidad inmutable de 80
 	 */
 	@Test
 	void sulfurasImmutableQualityEighty() {
@@ -185,14 +201,46 @@ class GildedRoseTest {
 	 */
 	@Test
 	void backstageAfterSellInQualityFallCero() {
-		
+
 		Item[] items = new Item[] { new Item("Backstage passes to a TAFKAL80ETC concert", 0, 5) };
 
 		GildedRose app = new GildedRose(items);
 
 		app.updateQuality();
 
-		assertEquals(0, app.items[0].quality);		
+		assertEquals(0, app.items[0].quality);
+	}
+
+	/**
+	 * (Conjured Product) Degrada su calidad al doble de velocidad que los productos
+	 * normales
+	 */
+	@Test
+	void conjuredProductDecreasedQualityDouble() {
+
+		Item[] items = new Item[] { new Item("Conjured Product", 2, 5) };
+
+		GildedRose app = new GildedRose(items);
+
+		app.updateQuality();
+
+		assertEquals(3, app.items[0].quality);
+	}
+
+	/**
+	 * (Conjured Product) después de la fecha de venta degrada su calidad al doble
+	 * de velocidad que los productos normales
+	 */
+	@Test
+	void conjuredProductAfterSellInDecreasedQualityDouble() {
+
+		Item[] items = new Item[] { new Item("Conjured Product", 0, 5) };
+
+		GildedRose app = new GildedRose(items);
+
+		app.updateQuality();
+
+		assertEquals(1, app.items[0].quality);
 	}
 
 }

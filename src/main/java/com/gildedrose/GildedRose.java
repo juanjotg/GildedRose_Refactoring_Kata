@@ -14,8 +14,13 @@ class GildedRose {
                 if (items[i].quality > 0) {
                     if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
                         items[i].quality = items[i].quality - 1;
-                    }
+                    }                                        
                 }
+                
+                if (items[i].name.equals("Conjured Product") && items[i].quality > 0) {
+                    items[i].quality = items[i].quality - 1;
+                }
+                
             } else {
                 if (items[i].quality < 50) {
                     items[i].quality = items[i].quality + 1;
@@ -46,8 +51,13 @@ class GildedRose {
                         if (items[i].quality > 0) {
                             if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
                                 items[i].quality = items[i].quality - 1;
-                            }
+                            }                                                       
                         }
+                        
+                        if (items[i].name.equals("Conjured Product") && items[i].quality > 0) {
+                            items[i].quality = items[i].quality - 1;
+                        }
+                        
                     } else {
                         items[i].quality = items[i].quality - items[i].quality;
                     }

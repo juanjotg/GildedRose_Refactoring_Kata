@@ -71,6 +71,49 @@ class GildedRoseTest {
 	}
 
 	/**
+	 * (Aged brie) incrementa su calidad en 1 unidad cada día
+	 */
+	@Test
+	void agedBrieIncreasesQualityByOneUnitPerDay() {
+
+		Item[] items = new Item[] { new Item("Aged Brie", 1, 4) };
+		GildedRose app = new GildedRose(items);
+
+		app.updateQuality();
+
+		assertEquals(5, app.items[0].quality);
+	}
+
+	/**
+	 * (Aged brie) incrementa su calidad en 2 unidades después de la fecha de venta.
+	 */
+	@Test
+	void agedBrieIncreasesQualityByTwoUnitAfterExpired() {
+
+		Item[] items = new Item[] { new Item("Aged Brie", 0, 4) };
+		GildedRose app = new GildedRose(items);
+
+		app.updateQuality();
+
+		assertEquals(6, app.items[0].quality);
+	}
+
+	/**
+	 * La calidad de un artículo nunca es mayor a 50
+	 */
+	@Test
+	void qualityNeverHigherThanFifty() {
+
+		Item[] items = new Item[] { new Item("Aged Brie", 1, 50) };
+
+		GildedRose app = new GildedRose(items);
+
+		app.updateQuality();
+
+		assertEquals(50, app.items[0].quality);
+	}
+
+	/**
 	 * (Sulfuras), no modifica su fecha de venta ni se degrada en calidad
 	 */
 	@Test

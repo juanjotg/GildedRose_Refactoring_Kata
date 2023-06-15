@@ -23,6 +23,7 @@ public class AgedBrieBusinessTest {
 		item = agedBrie.manageQuality(item);	
 
 		assertEquals(5, item.quality);
+		assertEquals(0, item.sellIn);
 	}
 
 	/**

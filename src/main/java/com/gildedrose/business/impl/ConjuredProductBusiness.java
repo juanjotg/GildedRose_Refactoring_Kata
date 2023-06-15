@@ -19,7 +19,7 @@ public class ConjuredProductBusiness implements IProduct {
 
 		if (item.quality > 0) {
 
-			if (item.sellIn <= 0) {
+			if (item.sellIn < 0) {
 
 				item.quality = item.quality - 4;
 

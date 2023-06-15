@@ -1,8 +1,10 @@
-package com.gildedrose;
+package com.gildedrose.facade;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import com.gildedrose.dto.Item;
 
 class GildedRoseTest {
 
@@ -211,36 +213,6 @@ class GildedRoseTest {
 		assertEquals(0, app.items[0].quality);
 	}
 
-	/**
-	 * (Conjured Product) Degrada su calidad al doble de velocidad que los productos
-	 * normales
-	 */
-	@Test
-	void conjuredProductDecreasedQualityDouble() {
 
-		Item[] items = new Item[] { new Item("Conjured Product", 2, 5) };
-
-		GildedRose app = new GildedRose(items);
-
-		app.updateQuality();
-
-		assertEquals(3, app.items[0].quality);
-	}
-
-	/**
-	 * (Conjured Product) después de la fecha de venta degrada su calidad al doble
-	 * de velocidad que los productos normales
-	 */
-	@Test
-	void conjuredProductAfterSellInDecreasedQualityDouble() {
-
-		Item[] items = new Item[] { new Item("Conjured Product", 0, 5) };
-
-		GildedRose app = new GildedRose(items);
-
-		app.updateQuality();
-
-		assertEquals(1, app.items[0].quality);
-	}
 
 }

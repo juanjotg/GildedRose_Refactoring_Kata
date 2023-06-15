@@ -1,6 +1,10 @@
-package com.gildedrose;
+package com.gildedrose.facade;
 
-class GildedRose {
+import com.gildedrose.business.IProduct;
+import com.gildedrose.business.factory.ProductFactory;
+import com.gildedrose.dto.Item;
+
+public class GildedRose {
     Item[] items;
 
     public GildedRose(Item[] items) {
@@ -8,19 +12,26 @@ class GildedRose {
     }
 
     public void updateQuality() {
+    	
         for (int i = 0; i < items.length; i++) {
+        	
+        	IProduct product = ProductFactory.get(items[i].name);
+        	
+        	if (product != null) {
+        		
+        		items[i].sellIn = product.manageSellIn(items[i].sellIn);
+        		items[i] = product.manageQuality(items[i]);
+        		
+        		break;        		
+        	}	
+        	
             if (!items[i].name.equals("Aged Brie")
                     && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
                 if (items[i].quality > 0) {
                     if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
                         items[i].quality = items[i].quality - 1;
-                    }                                        
+                    }
                 }
-                
-                if (items[i].name.equals("Conjured Product") && items[i].quality > 0) {
-                    items[i].quality = items[i].quality - 1;
-                }
-                
             } else {
                 if (items[i].quality < 50) {
                     items[i].quality = items[i].quality + 1;
@@ -51,13 +62,8 @@ class GildedRose {
                         if (items[i].quality > 0) {
                             if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
                                 items[i].quality = items[i].quality - 1;
-                            }                                                       
+                            }
                         }
-                        
-                        if (items[i].name.equals("Conjured Product") && items[i].quality > 0) {
-                            items[i].quality = items[i].quality - 1;
-                        }
-                        
                     } else {
                         items[i].quality = items[i].quality - items[i].quality;
                     }
@@ -66,7 +72,7 @@ class GildedRose {
                         items[i].quality = items[i].quality + 1;
                     }
                 }
-            }
+            }        
         }
     }
 }

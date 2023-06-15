@@ -1,5 +1,8 @@
 package com.gildedrose;
 
+import com.gildedrose.dto.Item;
+import com.gildedrose.facade.GildedRose;
+
 public class TexttestFixture {
     public static void main(String[] args) {
         System.out.println("OMGHAI!");

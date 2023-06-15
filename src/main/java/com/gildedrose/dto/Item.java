@@ -1,4 +1,4 @@
-package com.gildedrose;
+package com.gildedrose.dto;
 
 public class Item {
 
